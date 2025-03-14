@@ -22,47 +22,37 @@
 </head>
 
 <body>
-    <header></header>
+    <header>
+        <div id="nv" class="bg-green-500 text-white p-4 mt-4 hidden">This is NV
+            <button onclick="logout()" class="btn btn-secondary">Logout</button>
+        </div>
+
+    </header>
     <main class="container mx-auto mt-[10%]">
-        <section class="flex justify-between items-center">
+        <section id="banner" class="flex justify-between items-center">
             <div>
                 <h1 class="text-3xl font-bold"><span class="text-[#00BCFF]">English</span> is Easy!!</h1>
                 <p class="mt-3">আজ থেকেই আপনার ভাষা শেখার যাত্রা শুরু করুন। আপনি যদি নতুন হন অথবা <br> আপনার দক্ষতা
                     বাড়াতে
                     চান, আমাদের Interactive Lessons আপনাকে নিয়ে যাবে <br> অন্য একটি Level এ</p>
 
-                <form class="mt-4">
+                <form id="login-form">
                     <label class="input validator">
-                        <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none"
-                                stroke="currentColor">
-                                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
-                                <circle cx="12" cy="7" r="4"></circle>
-                            </g>
-                        </svg>
-                        <input type="input" required placeholder="Username" pattern="[A-Za-z][A-Za-z0-9\-]*"
-                            minlength="1" maxlength="30" title="Only letters, numbers or dash" />
+                        <input id="username" type="input" required placeholder="Username" minlength="1"
+                            maxlength="30" />
                     </label>
 
                     <label class="input validator mt-3">
-                        <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none"
-                                stroke="currentColor">
-                                <path
-                                    d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z">
-                                </path>
-                                <circle cx="16.5" cy="7.5" r=".5" fill="currentColor"></circle>
-                            </g>
-                        </svg>
-                        <input type="password" required placeholder="Enter 6-digit Password" minlength="6" maxlength="6"
-                            pattern="\d{6}" title="Password must be exactly 6 digits (numbers only)" />
-
+                        <input id="password" type="password" required placeholder="Enter 6-digit Password" minlength="6"
+                            maxlength="6" pattern="\d{6}" />
                     </label>
-                    <p class="validator-hint hidden">
-                        Must be 123456
-                    </p>
-                </form>
 
+                    <br><br>
+                    <button id="submit-btn" onclick="validateForm(event)" type="submit"
+                        class="btn btn-active btn-primary">
+                        Submit
+                    </button>
+                </form>
             </div>
             <div>
                 <img class="w-full h-[500px]" src="./assets/hero-student.png" alt="banner-img">
