@@ -23,13 +23,26 @@
 
 <body>
     <header>
-        <div id="nv" class="bg-green-500 text-white p-4 mt-4 hidden">This is NV
-            <button onclick="logout()" class="btn btn-secondary">Logout</button>
-        </div>
+        <!-- hidden will be  added later -->
+        <nav id="nv" class="bg-[#C6BDBD30] text-white p-4  border-gray-200 border-b-2">
+            <div class="container mx-auto flex justify-between">
+                <div>
+                    <p class="text-black flex items-center"><span class="font-bold">English</span><img
+                            src="./assets/logo.png" alt="logo">জানালা </p>
+                </div>
+                <div>
+                    <button class="btn btn-outline btn-primary">FAQ</button>
+                    <button class="btn btn-outline btn-primary">Learn</button>
+                    <button onclick="logout()" class="btn btn-outline btn-primary">Logout</button>
+                </div>
+            </div>
+
+        </nav>
 
     </header>
     <main class="container mx-auto mt-[10%]">
-        <section id="banner" class="flex justify-between items-center">
+        <!-- banner shouldn't be hidden  -->
+        <!-- <section id="banner" class="flex justify-between items-center ">
             <div>
                 <h1 class="text-3xl font-bold"><span class="text-[#00BCFF]">English</span> is Easy!!</h1>
                 <p class="mt-3">আজ থেকেই আপনার ভাষা শেখার যাত্রা শুরু করুন। আপনি যদি নতুন হন অথবা <br> আপনার দক্ষতা
@@ -49,12 +62,42 @@
 
                     <br><br>
                     <button id="submit-btn" onclick="login(event)" type="submit" class="btn btn-active btn-primary">
-                        Submit
+                        Get Started
                     </button>
                 </form>
             </div>
             <div>
                 <img class="w-full h-[500px]" src="./assets/hero-student.png" alt="banner-img">
+            </div>
+        </section> -->
+
+        <!-- Vocabularies -->
+        <section></section>
+
+        <!-- FAQ -->
+        <section class="grid gap-5">
+            <div class="mb-10">
+                <h1 class="text-3xl font-bold text-center"><span class="text-[#00BCFF]">Frequently</span> Asked
+                    Questions
+                </h1>
+            </div>
+            <div class="collapse collapse-plus bg-base-100 border border-base-300">
+                <input type="radio" name="my-accordion-3" checked="checked" />
+                <div class="collapse-title font-semibold">How do I create an account?</div>
+                <div class="collapse-content text-sm">Click the "Sign Up" button in the top right corner and follow the
+                    registration process.</div>
+            </div>
+            <div class="collapse collapse-plus bg-base-100 border border-base-300">
+                <input type="radio" name="my-accordion-3" />
+                <div class="collapse-title font-semibold">I forgot my password. What should I do?</div>
+                <div class="collapse-content text-sm">Click on "Forgot Password" on the login page and follow the
+                    instructions sent to your email.</div>
+            </div>
+            <div class="collapse collapse-plus bg-base-100 border border-base-300">
+                <input type="radio" name="my-accordion-3" />
+                <div class="collapse-title font-semibold">How do I update my profile information?</div>
+                <div class="collapse-content text-sm">Go to "My Account" settings and select "Edit Profile" to make
+                    changes.</div>
             </div>
         </section>
     </main>
