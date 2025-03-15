@@ -1,14 +1,12 @@
-function validateForm(event) {
+function login(event) {
   event.preventDefault();
-
   const user = document.getElementById("username").value;
+  //   console.log(user);
   const password = document.getElementById("password").value;
-
   if (!user) {
     alert("Please enter a username.");
     return;
   }
-
   if (password === "123456") {
     document.getElementById("banner").classList.add("hidden");
     document.getElementById("nv").classList.remove("hidden");
