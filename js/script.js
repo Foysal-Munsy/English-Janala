@@ -3,11 +3,11 @@ function login(event) {
   const user = document.getElementById("username").value;
   //   console.log(user);
   const password = document.getElementById("password").value;
-  if (!user) {
+  if (user) {
     alert("Please enter a username.");
     return;
   }
-  if (password === "123456") {
+  if (password === "") {
     document.getElementById("banner").classList.add("hidden");
     document.getElementById("nv").classList.remove("hidden");
     document.getElementById("voca").classList.remove("hidden");
@@ -24,15 +24,21 @@ function logout() {
   document.getElementById("faq").classList.add("hidden");
   document.getElementById("foot").classList.add("hidden");
 }
-
-const vocabulariesBtn = () => {
+function removeActiveClass() {
+  const activeBtns = document.getElementsByClassName("active");
+  for (let btn of activeBtns) {
+    btn.classList.remove("active");
+  }
+}
+const loadAllLevels = () => {
   const url = "https://openapi.programming-hero.com/api/levels/all";
   fetch(url)
     .then((res) => res.json())
-    .then((data) => displayLevel(data));
+    .then((data) => {
+      displayBtnLevel(data);
+    });
 };
-const displayLevel = (levels) => {
-  //   console.log(levels.data[0].level_no);
+const displayBtnLevel = (levels) => {
   const vocabulariesBtnContainer = document.getElementById(
     "vocabularies-btn-container"
   );
@@ -40,10 +46,70 @@ const displayLevel = (levels) => {
     // console.log(levels.data[i].level_no);
     const div = document.createElement("div");
     div.innerHTML = `
-    <button class="btn btn-outline btn-primary"><i class="fa-solid fa-book-open"></i> Lesson- ${levels.data[i].level_no}</button>
+    <button onclick="wordsByLevel(${levels.data[i].level_no})"  class="btn btn-outline btn-primary"><i class="fa-solid fa-book-open"></i> Lesson- ${levels.data[i].level_no}</button>
     `;
     vocabulariesBtnContainer.append(div);
   }
 };
 
-vocabulariesBtn();
+const wordsByLevel = (id) => {
+  //   console.log(id);
+  const url = `https://openapi.programming-hero.com/api/level/${id}`;
+  fetch(url)
+    .then((res) => res.json())
+    .then((data) => {
+      //   removeActiveClass();
+      //   document.getElementById("btn-all").classList.add("active");
+      displayWords(data);
+    });
+};
+
+const displayWords = (lessons) => {
+  console.log(lessons.data.length);
+  const lessonContainer = document.getElementById("lesson-container");
+  const noLessonContainer = document.getElementById("no-lesson-container");
+  lessonContainer.innerHTML = "";
+  if (!lessons.data.length) {
+    document.getElementById("lesson-container").classList.remove("grid");
+    lessonContainer.innerHTML = `
+    <div class="bg-gray-50 text-center py-20 rounded-2xl grid gap-3">
+                    <p class="text-sm text-gray-400">আপনি এখনো কোন Lesson Select করেন নি।</p>
+                    <h1 class="text-2xl">একটি Lesson Select করুন।</h1>
+                </div>
+          `;
+    return;
+  } else if (lessons.data.length === 0) {
+    document.getElementById("lesson-container").classList.remove("grid");
+    lessonContainer.innerHTML = `
+         <div class="bg-gray-50 text-center py-20 rounded-2xl grid place-items-center gap-3">
+                    <img src="./assets/alert-error.png" alt="alert">
+                    <p class="text-sm text-gray-400">এই Lesson এ এখনো কোন Vocabulary যুক্ত করা হয়নি।</p>
+                    <h1 class="text-2xl">নেক্সট Lesson এ যান</h1>
+                </div>
+          `;
+    return;
+  }
+
+  lessons.data.forEach((lesson) => {
+    //   console.log(lesson);
+    document.getElementById("lesson-container").classList.add("grid");
+    const lessonCard = document.createElement("div");
+    lessonCard.innerHTML = `
+      <div class="bg-white rounded-lg p-10">
+                        <div class="grid place-items-center">
+                            <h1>Eager</h1>
+                            <p>Meaning /Pronounciation</p>
+                            <h1>"আগ্রহী / ইগার"</h1>
+                        </div>
+                        <div class="flex justify-between">
+                            <button class="btn btn-square"><i class="fa-solid fa-circle-info"></i></button>
+                            <button class="btn btn-square"><i class="fa-solid fa-volume-high"></i></button>
+                        </div>
+                    </div>
+      `;
+    lessonContainer.append(lessonCard);
+  });
+};
+
+wordsByLevel();
+loadAllLevels();
