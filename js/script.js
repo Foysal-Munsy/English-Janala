@@ -61,15 +61,18 @@ const wordsByLevel = (id) => {
       //   removeActiveClass();
       //   document.getElementById("btn-all").classList.add("active");
       displayWords(data);
+      const ids = data.data.map((item) => item.id); // Extract all IDs
+      //   console.log(ids);
     });
 };
 
-const displayWords = (lessons) => {
-  console.log(lessons.data.length);
+const displayWords = (lessons = "") => {
+  //   console.log(lessons.data.length);
   const lessonContainer = document.getElementById("lesson-container");
   const noLessonContainer = document.getElementById("no-lesson-container");
   lessonContainer.innerHTML = "";
-  if (!lessons.data.length) {
+  //   console.log(lessons.data);
+  if (lessons.data.length === undefined) {
     document.getElementById("lesson-container").classList.remove("grid");
     lessonContainer.innerHTML = `
     <div class="bg-gray-50 text-center py-20 rounded-2xl grid gap-3">
@@ -77,6 +80,7 @@ const displayWords = (lessons) => {
                     <h1 class="text-2xl">একটি Lesson Select করুন।</h1>
                 </div>
           `;
+
     return;
   } else if (lessons.data.length === 0) {
     document.getElementById("lesson-container").classList.remove("grid");
@@ -89,20 +93,19 @@ const displayWords = (lessons) => {
           `;
     return;
   }
-
   lessons.data.forEach((lesson) => {
-    //   console.log(lesson);
+    // console.log(lesson);
     document.getElementById("lesson-container").classList.add("grid");
     const lessonCard = document.createElement("div");
     lessonCard.innerHTML = `
-      <div class="bg-white rounded-lg p-10">
+      <div class="bg-white rounded-lg p-10 grid gap-7">
                         <div class="grid place-items-center">
-                            <h1>Eager</h1>
-                            <p>Meaning /Pronounciation</p>
-                            <h1>"আগ্রহী / ইগার"</h1>
+                            <h1 class="font-bold text-xl">${lesson.word}</h1>
+                            <p>Meaning /Pronunciation</p>
+                            <h1 class="font-semi-bold text-gray-700 text-xl">"${lesson.meaning} / ${lesson.pronunciation}"</h1>
                         </div>
                         <div class="flex justify-between">
-                            <button class="btn btn-square"><i class="fa-solid fa-circle-info"></i></button>
+                            <button onclick="word_details.showModal()" class="btn btn-square"><i class="fa-solid fa-circle-info"></i></button>
                             <button class="btn btn-square"><i class="fa-solid fa-volume-high"></i></button>
                         </div>
                     </div>
@@ -110,6 +113,21 @@ const displayWords = (lessons) => {
     lessonContainer.append(lessonCard);
   });
 };
+const loadWordDetails = (id) => {
+  //   console.log(id.id);
+  const url = `https://openapi.programming-hero.com/api/word/${id}`;
+  //   fetch(url)
+  //     .then((res) => res.json())
+  //     .then((data) => console.log(data));
+};
+// const displayWordDetails = (word) => {
+//   console.log(word);
+//   //   const videoDetails = document.getElementById("video_details");
+//   //   videoDetails.showModal();
+//   //   const detailsContainer = document.getElementById("details_container");
+//   //   detailsContainer.innerHTML = `
 
+//   //     `;
+// };
 wordsByLevel();
 loadAllLevels();
