@@ -61,8 +61,7 @@ const wordsByLevel = (id) => {
       //   removeActiveClass();
       //   document.getElementById("btn-all").classList.add("active");
       displayWords(data);
-      const ids = data.data.map((item) => item.id); // Extract all IDs
-      //   console.log(ids);
+      //   displayModal(data);
     });
 };
 
@@ -93,10 +92,13 @@ const displayWords = (lessons = "") => {
           `;
     return;
   }
+  //   console.log(lessons.data.length);
+  // loop
   lessons.data.forEach((lesson) => {
-    // console.log(lesson);
+    // console.log(lesson.id);
     document.getElementById("lesson-container").classList.add("grid");
     const lessonCard = document.createElement("div");
+    // onclick="word_details.showModal()"
     lessonCard.innerHTML = `
       <div class="bg-white rounded-lg p-10 grid gap-7">
                         <div class="grid place-items-center">
@@ -105,7 +107,8 @@ const displayWords = (lessons = "") => {
                             <h1 class="font-semi-bold text-gray-700 text-xl">"${lesson.meaning} / ${lesson.pronunciation}"</h1>
                         </div>
                         <div class="flex justify-between">
-                            <button onclick="word_details.showModal()" class="btn btn-square"><i class="fa-solid fa-circle-info"></i></button>
+                       
+                            <button onclick="displayModal(${lesson.id})"  class="btn btn-square"><i class="fa-solid fa-circle-info"></i></button>
                             <button class="btn btn-square"><i class="fa-solid fa-volume-high"></i></button>
                         </div>
                     </div>
@@ -113,21 +116,39 @@ const displayWords = (lessons = "") => {
     lessonContainer.append(lessonCard);
   });
 };
-const loadWordDetails = (id) => {
-  //   console.log(id.id);
+const displayModal = (id) => {
+  console.log(id);
+  //   const url = `https:// openapi.programming-hero.com/api/word/${id}`;
   const url = `https://openapi.programming-hero.com/api/word/${id}`;
-  //   fetch(url)
-  //     .then((res) => res.json())
-  //     .then((data) => console.log(data));
+  fetch(url)
+    .then((res) => res.json())
+    .then((data) => displayWordDetails(data));
 };
-// const displayWordDetails = (word) => {
-//   console.log(word);
-//   //   const videoDetails = document.getElementById("video_details");
-//   //   videoDetails.showModal();
-//   //   const detailsContainer = document.getElementById("details_container");
-//   //   detailsContainer.innerHTML = `
 
-//   //     `;
-// };
+const displayWordDetails = (word) => {
+  console.log(word.data);
+  const wordDetails = document.getElementById("word_details");
+  wordDetails.showModal();
+  const detailsContainer = document.getElementById("details_container");
+  detailsContainer.innerHTML = `
+    <div class="modal-box">
+                    <h2 class="text-xl font-bold">${word.data.word} <span class="text-gray-500">(<i class="fa-solid fa-microphone-lines"></i>: ${word.data.pronunciation} )</span></h2>
+                    <p class="mt-3 font-semibold">Meaning</p>
+                    <p class="text-gray-700">${word.data.meaning}</p>
+                    <p class="mt-3 font-semibold">Example</p>
+                    <p class="text-gray-700">${word.data.sentence}</p>
+                    <p class="mt-3 font-semibold">সমার্থক শব্দগুলো</p>
+                    <div class="flex space-x-2 mt-2">
+                        <span class="px-3 py-1 bg-gray-200 rounded-md">Enthusiastic</span>
+                        <span class="px-3 py-1 bg-gray-200 rounded-md">excited</span>
+                        <span class="px-3 py-1 bg-gray-200 rounded-md">keen</span>
+                    </div>
+                    <form method="dialog">
+                        <button class="btn btn-active mt-5 btn-primary text-white py-2 rounded-lg">Complete
+                            Learning</button>
+                    </form>
+                </div>
+      `;
+};
 wordsByLevel();
 loadAllLevels();
