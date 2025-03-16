@@ -126,28 +126,39 @@ const displayModal = (id) => {
 };
 
 const displayWordDetails = (word) => {
-  console.log(word.data);
+  console.log(word.data.synonyms);
+  const synonym = word.data.synonyms;
+  const synonymContainer =
+    synonym.length > 0
+      ? synonym
+          .map(
+            (word) =>
+              `<span class="px-3 py-1 bg-blue-100 rounded-md">${word}</span>`
+          )
+          .join("")
+      : `<p class="text-gray-700">এখানে কোনো সমার্থক শব্দ খুঁজে পাওয়া যায় নি।</p>`;
+
   const wordDetails = document.getElementById("word_details");
   wordDetails.showModal();
-  const detailsContainer = document.getElementById("details_container");
+  const detailsContainer = document.getElementById("word_details");
   detailsContainer.innerHTML = `
     <div class="modal-box">
-                    <h2 class="text-xl font-bold">${word.data.word} <span class="text-gray-500">(<i class="fa-solid fa-microphone-lines"></i>: ${word.data.pronunciation} )</span></h2>
-                    <p class="mt-3 font-semibold">Meaning</p>
-                    <p class="text-gray-700">${word.data.meaning}</p>
-                    <p class="mt-3 font-semibold">Example</p>
-                    <p class="text-gray-700">${word.data.sentence}</p>
-                    <p class="mt-3 font-semibold">সমার্থক শব্দগুলো</p>
-                    <div class="flex space-x-2 mt-2">
-                        <span class="px-3 py-1 bg-gray-200 rounded-md">Enthusiastic</span>
-                        <span class="px-3 py-1 bg-gray-200 rounded-md">excited</span>
-                        <span class="px-3 py-1 bg-gray-200 rounded-md">keen</span>
-                    </div>
-                    <form method="dialog">
-                        <button class="btn btn-active mt-5 btn-primary text-white py-2 rounded-lg">Complete
-                            Learning</button>
-                    </form>
-                </div>
+        <div class="border border-blue-100 p-4 rounded-lg">
+            <h2 class="text-xl font-bold">${word.data.word} <span class="text-gray-500">(<i class="fa-solid fa-microphone-lines"></i>: ${word.data.pronunciation} )</span></h2>
+            <p class="mt-3 font-semibold">Meaning</p>
+            <p class="text-gray-700">${word.data.meaning}</p>
+            <p class="mt-3 font-semibold">Example</p>
+            <p class="text-gray-700">${word.data.sentence}</p>
+            <p class="mt-3 font-semibold">সমার্থক শব্দগুলো</p>
+            <div class="flex space-x-2 mt-2">
+                ${synonymContainer} 
+            </div>
+        </div>
+        <form method="dialog">
+            <button class="btn btn-active mt-5 btn-primary text-white py-2 rounded-lg">Complete
+                Learning</button>
+        </form>
+    </div>
       `;
 };
 wordsByLevel();
