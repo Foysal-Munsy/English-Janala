@@ -39,27 +39,68 @@ const loadAllLevels = () => {
     });
 };
 
+// const displayBtnLevel = (levels) => {
+//   const vocabulariesBtnContainer = document.getElementById(
+//     "vocabularies-btn-container"
+//   );
+//   for (let i = 0; i < levels.data.length; i++) {
+//     const div = document.createElement("div");
+//     // button element
+//     const button = document.createElement("button");
+//     button.id = `btn-${levels.data[i].level_no}`; // Unique ID
+//     button.className = "btn btn-outline btn-primary"; // Default classes
+//     button.innerHTML = `<i class="fa-solid fa-book-open"></i> Lesson- ${levels.data[i].level_no}`;
+//     button.addEventListener("click", function () {
+//       // Remove active class
+//       document
+//         .querySelectorAll("#vocabularies-btn-container button")
+//         .forEach((btn) => {
+//           btn.classList.remove("btn-active");
+//         });
+//       // Adding active class
+//       this.classList.add("btn-active");
+//       wordsByLevel(levels.data[i].level_no);
+//     });
+
+//     div.appendChild(button);
+//     vocabulariesBtnContainer.appendChild(div);
+//   }
+// };
 const displayBtnLevel = (levels) => {
   const vocabulariesBtnContainer = document.getElementById(
     "vocabularies-btn-container"
   );
+
   for (let i = 0; i < levels.data.length; i++) {
     const div = document.createElement("div");
-    // button element
+
+    // Create button element
     const button = document.createElement("button");
     button.id = `btn-${levels.data[i].level_no}`; // Unique ID
     button.className = "btn btn-outline btn-primary"; // Default classes
     button.innerHTML = `<i class="fa-solid fa-book-open"></i> Lesson- ${levels.data[i].level_no}`;
-    button.addEventListener("click", function () {
-      // Remove active class
+
+    button.addEventListener("click", async function () {
+      // Removing active class
       document
         .querySelectorAll("#vocabularies-btn-container button")
         .forEach((btn) => {
           btn.classList.remove("btn-active");
+          btn.innerHTML = `<i class="fa-solid fa-book-open"></i> Lesson- ${
+            btn.id.split("-")[1]
+          }`;
         });
+
       // Adding active class
       this.classList.add("btn-active");
-      wordsByLevel(levels.data[i].level_no);
+
+      this.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Loading...`;
+
+      await new Promise((resolve) => setTimeout(resolve, 200));
+      await wordsByLevel(levels.data[i].level_no);
+
+      // Restoring button text after loading
+      this.innerHTML = `<i class="fa-solid fa-book-open"></i> Lesson- ${levels.data[i].level_no}`;
     });
 
     div.appendChild(button);
