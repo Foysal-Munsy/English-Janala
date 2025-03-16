@@ -125,24 +125,17 @@ function pronounceWord(word) {
   utterance.lang = "en-EN"; // English
   window.speechSynthesis.speak(utterance);
 }
-const displayWords = (lessons = "") => {
+const displayWords = (lessons = null) => {
   //   console.log(lessons.data.length);
   const lessonContainer = document.getElementById("lesson-container");
   const noLessonContainer = document.getElementById("no-lesson-container");
   lessonContainer.innerHTML = "";
   //   console.log(lessons.data);
-  if (lessons.data.length === undefined) {
-    document.getElementById("lesson-container").classList.remove("grid");
-    lessonContainer.innerHTML = `
-    <div class="bg-gray-50 text-center py-20 rounded-2xl grid gap-3">
-                    <p class="text-sm text-gray-400">আপনি এখনো কোন Lesson Select করেন নি।</p>
-                    <h1 class="text-2xl">একটি Lesson Select করুন।</h1>
-                </div>
-          `;
-
-    return;
-  } else if (lessons.data.length === 0) {
-    document.getElementById("lesson-container").classList.remove("grid");
+  if (lessons.data.length === 0) {
+    document.getElementById("no-lesson-container").classList.add("hidden");
+    document
+      .getElementById("lesson-container")
+      .classList.remove("grid", "hidden");
     lessonContainer.innerHTML = `
          <div class="bg-gray-50 text-center py-20 rounded-2xl grid place-items-center gap-3">
                     <img src="./assets/alert-error.png" alt="alert">

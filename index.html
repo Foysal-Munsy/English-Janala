@@ -87,26 +87,13 @@
                 <div id="vocabularies-btn-container" class="flex gap-3 items-center justify-center mt-5">
                 </div>
                 <!-- No lesson selected yet -->
-
+                <div id="no-lesson-container" class="bg-gray-50 text-center py-20 rounded-2xl grid gap-3">
+                    <p class="text-sm text-gray-400">আপনি এখনো কোন Lesson Select করেন নি।</p>
+                    <h1 class="text-2xl">একটি Lesson Select করুন।</h1>
+                </div>
                 <!-- Load lesson -->
-                <div id="lesson-container" class="grid grid-cols-3 gap-4 bg-gray-50 rounded-2xl px-3 py-4">
-                    <!-- each card -->
-                    <div id="loading-spinner" style="display: none; text-align: center; margin-top: 20px;">
-                        <i class="fa-solid fa-spinner fa-spin" style="font-size: 24px;"></i> Loading...
-                    </div>
-
-                    <!-- <div class="bg-white rounded-lg p-10">
-
-                        <div class="grid place-items-center">
-                            <h1>Eager</h1>
-                            <p>Meaning /Pronounciation</p>
-                            <h1>"আগ্রহী / ইগার"</h1>
-                        </div>
-                        <div class="flex justify-between">
-                            <button class="btn btn-square"><i class="fa-solid fa-circle-info"></i></button>
-                            <button class="btn btn-square"><i class="fa-solid fa-volume-high"></i></button>
-                        </div>
-                    </div> -->
+                <div id="lesson-container" class="hidden grid grid-cols-3 gap-4 bg-gray-50 rounded-2xl px-3 py-4">
+                    <!-- each card will show from api-->
                 </div>
             </div>
         </section>
