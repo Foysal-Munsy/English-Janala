@@ -12,7 +12,7 @@ function login(event) {
     document.getElementById("nv").classList.remove("hidden");
     document.getElementById("voca").classList.remove("hidden");
     document.getElementById("faq").classList.remove("hidden");
-    document.getElementById("foot").classList.remove("hidden");
+    // document.getElementById("foot").classList.remove("hidden");
   } else {
     alert("Incorrect password. Please enter 123456.");
   }
@@ -22,7 +22,7 @@ function logout() {
   document.getElementById("nv").classList.add("hidden");
   document.getElementById("voca").classList.add("hidden");
   document.getElementById("faq").classList.add("hidden");
-  document.getElementById("foot").classList.add("hidden");
+  //   document.getElementById("foot").classList.add("hidden");
 }
 function removeActiveClass() {
   const activeBtns = document.getElementsByClassName("active");
@@ -39,33 +39,6 @@ const loadAllLevels = () => {
     });
 };
 
-// const displayBtnLevel = (levels) => {
-//   const vocabulariesBtnContainer = document.getElementById(
-//     "vocabularies-btn-container"
-//   );
-//   for (let i = 0; i < levels.data.length; i++) {
-//     const div = document.createElement("div");
-//     // button element
-//     const button = document.createElement("button");
-//     button.id = `btn-${levels.data[i].level_no}`; // Unique ID
-//     button.className = "btn btn-outline btn-primary"; // Default classes
-//     button.innerHTML = `<i class="fa-solid fa-book-open"></i> Lesson- ${levels.data[i].level_no}`;
-//     button.addEventListener("click", function () {
-//       // Remove active class
-//       document
-//         .querySelectorAll("#vocabularies-btn-container button")
-//         .forEach((btn) => {
-//           btn.classList.remove("btn-active");
-//         });
-//       // Adding active class
-//       this.classList.add("btn-active");
-//       wordsByLevel(levels.data[i].level_no);
-//     });
-
-//     div.appendChild(button);
-//     vocabulariesBtnContainer.appendChild(div);
-//   }
-// };
 const displayBtnLevel = (levels) => {
   const vocabulariesBtnContainer = document.getElementById(
     "vocabularies-btn-container"
@@ -126,45 +99,56 @@ function pronounceWord(word) {
   window.speechSynthesis.speak(utterance);
 }
 const displayWords = (lessons = null) => {
-  //   console.log(lessons.data.length);
+  console.log(lessons);
   const lessonContainer = document.getElementById("lesson-container");
-  const noLessonContainer = document.getElementById("no-lesson-container");
+  //   document.getElementById("lesson-container").classList.remove("grid");
+  //   const noLessonContainer = document.getElementById("no-lesson-container");
   lessonContainer.innerHTML = "";
   //   console.log(lessons.data);
+  //   if (lessons.data.length !== 0) {
+  //     document.getElementById("lesson-container").classList.remove("grid");
+  //     lessonContainer.innerHTML = `
+  //              <div class="bg-gray-50 text-center py-20 rounded-2xl grid gap-3">
+  //                             <p class="text-sm text-gray-400">আপনি এখনো কোন Lesson Select করেন নি।</p>
+  //                             <h1 class="text-2xl">একটি Lesson Select করুন।</h1>
+  //                         </div>
+  //               `;
+  //     return;
+  //   }
+
   if (lessons.data.length === 0) {
-    document.getElementById("no-lesson-container").classList.add("hidden");
-    document
-      .getElementById("lesson-container")
-      .classList.remove("grid", "hidden");
+    console.log(lessons.data.length);
+    document.getElementById("lesson-container").classList.remove("grid");
     lessonContainer.innerHTML = `
-         <div class="bg-gray-50 text-center py-20 rounded-2xl grid place-items-center gap-3">
-                    <img src="./assets/alert-error.png" alt="alert">
-                    <p class="text-sm text-gray-400">এই Lesson এ এখনো কোন Vocabulary যুক্ত করা হয়নি।</p>
-                    <h1 class="text-2xl">নেক্সট Lesson এ যান</h1>
-                </div>
-          `;
+           <div class="bg-gray-50 text-center py-20 rounded-2xl grid place-items-center gap-3">
+                      <img src="./assets/alert-error.png" alt="alert">
+                      <p class="text-sm text-gray-400">এই Lesson এ এখনো কোন Vocabulary যুক্ত করা হয়নি।</p>
+                      <h1 class="text-2xl">নেক্সট Lesson এ যান</h1>
+                  </div>
+            `;
     return;
   }
-  //   console.log(lessons.data.length);
-  // loop
+
   lessons.data.forEach((lesson) => {
     // console.log(lesson.id);
-    document.getElementById("lesson-container").classList.add("grid");
+    document
+      .getElementById("lesson-container")
+      .classList.add("grid", "grid-cols-3", "gap-4");
     const lessonCard = document.createElement("div");
     lessonCard.innerHTML = `
-      <div class="bg-white rounded-lg p-10 grid gap-7">
-                        <div class="grid place-items-center">
-                            <h1 class="font-bold text-xl">${lesson.word}</h1>
-                            <p>Meaning /Pronunciation</p>
-                            <h1 class="font-semi-bold text-gray-700 text-xl">"${lesson.meaning} / ${lesson.pronunciation}"</h1>
+          <div class="bg-white rounded-lg p-10 grid gap-7">
+                            <div class="grid place-items-center">
+                                <h1 class="font-bold text-xl">${lesson.word}</h1>
+                                <p>Meaning /Pronunciation</p>
+                                <h1 class="font-semi-bold text-gray-700 text-xl">"${lesson.meaning} / ${lesson.pronunciation}"</h1>
+                            </div>
+                            <div class="flex justify-between">
+                           
+                                <button onclick="displayModal(${lesson.id})"  class="btn btn-square"><i class="fa-solid fa-circle-info"></i></button>
+                                <button onclick="pronounceWord('${lesson.word}')" class="btn btn-square"><i class="fa-solid fa-volume-high"></i></button>
+                            </div>
                         </div>
-                        <div class="flex justify-between">
-                       
-                            <button onclick="displayModal(${lesson.id})"  class="btn btn-square"><i class="fa-solid fa-circle-info"></i></button>
-                            <button onclick="pronounceWord('${lesson.word}')" class="btn btn-square"><i class="fa-solid fa-volume-high"></i></button>
-                        </div>
-                    </div>
-      `;
+          `;
     lessonContainer.append(lessonCard);
   });
 };
@@ -212,5 +196,5 @@ const displayWordDetails = (word) => {
     </div>
       `;
 };
-wordsByLevel();
+// wordsByLevel();
 loadAllLevels();

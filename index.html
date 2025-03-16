@@ -47,7 +47,7 @@
         </nav>
 
     </header>
-    <main class="container mx-auto mt-[10%]">
+    <main class="container mx-auto ">
         <!-- banner shouldn't be hidden  -->
         <section id="banner" class="flex justify-between items-center ">
             <div>
@@ -55,7 +55,7 @@
                 <p class="mt-3">আজ থেকেই আপনার ভাষা শেখার যাত্রা শুরু করুন। আপনি যদি নতুন হন অথবা <br> আপনার দক্ষতা
                     বাড়াতে
                     চান, আমাদের Interactive Lessons আপনাকে নিয়ে যাবে <br> অন্য একটি Level এ</p>
-
+                <br>
                 <form id="login-form">
                     <label class="input validator">
                         <input id="username" type="input" required placeholder="Username" minlength="1"
@@ -87,12 +87,15 @@
                 <div id="vocabularies-btn-container" class="flex gap-3 items-center justify-center mt-5">
                 </div>
                 <!-- No lesson selected yet -->
-                <div id="no-lesson-container" class="bg-gray-50 text-center py-20 rounded-2xl grid gap-3">
-                    <p class="text-sm text-gray-400">আপনি এখনো কোন Lesson Select করেন নি।</p>
-                    <h1 class="text-2xl">একটি Lesson Select করুন।</h1>
-                </div>
+
                 <!-- Load lesson -->
-                <div id="lesson-container" class="hidden grid grid-cols-3 gap-4 bg-gray-50 rounded-2xl px-3 py-4">
+                <div id="lesson-container" class=" bg-gray-50 rounded-2xl px-3 py-4">
+                    <!-- <div id="no-lesson-container"> -->
+                    <div class="bg-gray-50 text-center py-20 rounded-2xl grid gap-3">
+                        <p class="text-sm text-gray-400">আপনি এখনো কোন Lesson Select করেন নি।</p>
+                        <h1 class="text-2xl">একটি Lesson Select করুন।</h1>
+                    </div>
+                    <!-- </div> -->
                     <!-- each card will show from api-->
                 </div>
             </div>
@@ -109,22 +112,46 @@
             <div class="grid gap-3 z-10">
                 <div class="collapse collapse-plus bg-base-100 border border-base-300">
                     <input type="radio" name="my-accordion-3" checked="checked" />
-                    <div class="collapse-title font-semibold">How do I create an account?</div>
-                    <div class="collapse-content text-sm">Click the "Sign Up" button in the top right corner and follow
-                        the
-                        registration process.</div>
+                    <div class="collapse-title font-semibold">The difference between var, let, and const</div>
+                    <div class="collapse-content text-sm">***var can be updated and redeclared <br>
+                        ***let can be updated and cannot be redeclared <br>
+                        ***const cannot be updated and redeclared</div>
                 </div>
                 <div class="collapse collapse-plus bg-base-100 border border-base-300">
                     <input type="radio" name="my-accordion-3" />
-                    <div class="collapse-title font-semibold">I forgot my password. What should I do?</div>
-                    <div class="collapse-content text-sm">Click on "Forgot Password" on the login page and follow the
-                        instructions sent to your email.</div>
+                    <div class="collapse-title font-semibold">The difference between map(), forEach(), and filter()
+                    </div>
+                    <div class="collapse-content text-sm">
+                        ***map() return new array with modified value <br>
+                        ***forEach() doesn't return anything <br>
+                        ***filter() returns a new array with elements that pass a condition
+                    </div>
                 </div>
                 <div class="collapse collapse-plus bg-base-100 border border-base-300">
                     <input type="radio" name="my-accordion-3" />
-                    <div class="collapse-title font-semibold">How do I update my profile information?</div>
-                    <div class="collapse-content text-sm">Go to "My Account" settings and select "Edit Profile" to make
-                        changes.</div>
+                    <div class="collapse-title font-semibold">Explain arrow functions and how they are different from
+                        regular functions</div>
+                    <div class="collapse-content text-sm">Arrow functions provide a shorter syntax and inherit
+                        <strong>this</strong> from
+                        the surrounding scope, while regular functions have their own <strong>this</strong>.
+                        Additionally, arrow
+                        functions can't be used as constructors and don't have their own <strong>arguments</strong>
+                        object.
+                    </div>
+                </div>
+                <div class="collapse collapse-plus bg-base-100 border border-base-300">
+                    <input type="radio" name="my-accordion-3" />
+                    <div class="collapse-title font-semibold">How JavaScript Promises work?</div>
+                    <div class="collapse-content text-sm">JavaScript Promises represent the eventual completion (or
+                        failure) of an asynchronous operation and allow chaining of .then() for success or .catch() for
+                        error handling.</div>
+                </div>
+                <div class="collapse collapse-plus bg-base-100 border border-base-300">
+                    <input type="radio" name="my-accordion-3" />
+                    <div class="collapse-title font-semibold">How closures work in JavaScript
+                        write it in one line?</div>
+                    <div class="collapse-content text-sm">Closures in JavaScript allow a function to retain access to
+                        variables from its outer lexical scope, even after the outer function has executed.</div>
                 </div>
             </div>
         </section>
@@ -135,7 +162,7 @@
 
 
     </main>
-    <footer id="foot" class="hidden mt-10 border-[#FFEBEB] border-t-2">
+    <footer id="foot" class=" mt-10 border-[#FFEBEB] border-t-2">
         <div class="container mx-auto flex justify-between py-20">
             <div class="grid gap-3">
                 <p class="text-black flex items-center"><span class="font-bold">English</span><img
@@ -148,7 +175,7 @@
             <div class="flex flex-col justify-end">
                 <h6 class="footer-title text-sm">Follow Us</h6>
                 <div class="flex gap-3">
-                    <a>
+                    <a href="https://www.facebook.com/foysal.munsy.fm">
                         <i class="fa-brands fa-facebook"></i>
                     </a>
                     <a>
