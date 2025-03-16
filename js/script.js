@@ -64,7 +64,11 @@ const wordsByLevel = (id) => {
       //   displayModal(data);
     });
 };
-
+function pronounceWord(word) {
+  const utterance = new SpeechSynthesisUtterance(word);
+  utterance.lang = "en-EN"; // English
+  window.speechSynthesis.speak(utterance);
+}
 const displayWords = (lessons = "") => {
   //   console.log(lessons.data.length);
   const lessonContainer = document.getElementById("lesson-container");
@@ -109,7 +113,7 @@ const displayWords = (lessons = "") => {
                         <div class="flex justify-between">
                        
                             <button onclick="displayModal(${lesson.id})"  class="btn btn-square"><i class="fa-solid fa-circle-info"></i></button>
-                            <button class="btn btn-square"><i class="fa-solid fa-volume-high"></i></button>
+                            <button onclick="pronounceWord('${lesson.word}')" class="btn btn-square"><i class="fa-solid fa-volume-high"></i></button>
                         </div>
                     </div>
       `;
