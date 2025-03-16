@@ -1,29 +1,88 @@
 function login(event) {
   event.preventDefault();
   const user = document.getElementById("username").value;
-  //   console.log(user);
   const password = document.getElementById("password").value;
-  if (user) {
-    alert("Please enter a username.");
+
+  if (!user) {
+    Swal.fire({
+      icon: "warning",
+      title: "Oops...",
+      text: "Please enter a username!",
+      confirmButtonText: "OK",
+    });
     return;
   }
-  if (password === "") {
-    document.getElementById("banner").classList.add("hidden");
-    document.getElementById("nv").classList.remove("hidden");
-    document.getElementById("voca").classList.remove("hidden");
-    document.getElementById("faq").classList.remove("hidden");
-    // document.getElementById("foot").classList.remove("hidden");
+
+  if (password === "123456") {
+    Swal.fire({
+      icon: "success",
+      title: "Login Successful!",
+      text: `Welcome, ${user}!`,
+      timer: 2000,
+      showConfirmButton: false,
+    }).then(() => {
+      // Show the hidden sections after the success message
+      document.getElementById("banner").classList.add("hidden");
+      document.getElementById("nv").classList.remove("hidden");
+      document.getElementById("voca").classList.remove("hidden");
+      document.getElementById("faq").classList.remove("hidden");
+      // document.getElementById("foot").classList.remove("hidden");
+    });
   } else {
-    alert("Incorrect password. Please enter 123456.");
+    Swal.fire({
+      icon: "error",
+      title: "Incorrect Password!",
+      text: "Please enter 123456.",
+      confirmButtonText: "Try Again",
+    });
   }
 }
+
+// window.addEventListener("beforeunload", function (event) {
+//   event.preventDefault(); // Required for some browsers
+//   event.returnValue = "Are you sure you want to leave or reload this page?";
+// });
+
 function logout() {
-  document.getElementById("banner").classList.remove("hidden");
-  document.getElementById("nv").classList.add("hidden");
-  document.getElementById("voca").classList.add("hidden");
-  document.getElementById("faq").classList.add("hidden");
-  //   document.getElementById("foot").classList.add("hidden");
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You will be logged out!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#d33",
+    cancelButtonColor: "#3085d6",
+    confirmButtonText: "Yes, Logout!",
+    cancelButtonText: "Cancel",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      document.getElementById("banner").classList.remove("hidden");
+      document.getElementById("nv").classList.add("hidden");
+      document.getElementById("voca").classList.add("hidden");
+      document.getElementById("faq").classList.add("hidden");
+      // document.getElementById("foot").classList.add("hidden");
+
+      Swal.fire({
+        icon: "success",
+        title: "Logged Out!",
+        text: "You have successfully logged out.",
+        timer: 5000,
+        showConfirmButton: false,
+      });
+    }
+  });
 }
+
+// window.addEventListener("beforeunload", function (event) {
+//   logout();
+// });
+
+// function logout() {
+//   document.getElementById("banner").classList.remove("hidden");
+//   document.getElementById("nv").classList.add("hidden");
+//   document.getElementById("voca").classList.add("hidden");
+//   document.getElementById("faq").classList.add("hidden");
+//   //   document.getElementById("foot").classList.add("hidden");
+// }
 function removeActiveClass() {
   const activeBtns = document.getElementsByClassName("active");
   for (let btn of activeBtns) {
