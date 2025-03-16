@@ -38,17 +38,32 @@ const loadAllLevels = () => {
       displayBtnLevel(data);
     });
 };
+
 const displayBtnLevel = (levels) => {
   const vocabulariesBtnContainer = document.getElementById(
     "vocabularies-btn-container"
   );
   for (let i = 0; i < levels.data.length; i++) {
-    // console.log(levels.data[i].level_no);
     const div = document.createElement("div");
-    div.innerHTML = `
-    <button onclick="wordsByLevel(${levels.data[i].level_no})"  class="btn btn-outline btn-primary"><i class="fa-solid fa-book-open"></i> Lesson- ${levels.data[i].level_no}</button>
-    `;
-    vocabulariesBtnContainer.append(div);
+    // button element
+    const button = document.createElement("button");
+    button.id = `btn-${levels.data[i].level_no}`; // Unique ID
+    button.className = "btn btn-outline btn-primary"; // Default classes
+    button.innerHTML = `<i class="fa-solid fa-book-open"></i> Lesson- ${levels.data[i].level_no}`;
+    button.addEventListener("click", function () {
+      // Remove active class
+      document
+        .querySelectorAll("#vocabularies-btn-container button")
+        .forEach((btn) => {
+          btn.classList.remove("btn-active");
+        });
+      // Adding active class
+      this.classList.add("btn-active");
+      wordsByLevel(levels.data[i].level_no);
+    });
+
+    div.appendChild(button);
+    vocabulariesBtnContainer.appendChild(div);
   }
 };
 
@@ -102,7 +117,6 @@ const displayWords = (lessons = "") => {
     // console.log(lesson.id);
     document.getElementById("lesson-container").classList.add("grid");
     const lessonCard = document.createElement("div");
-    // onclick="word_details.showModal()"
     lessonCard.innerHTML = `
       <div class="bg-white rounded-lg p-10 grid gap-7">
                         <div class="grid place-items-center">
@@ -122,7 +136,6 @@ const displayWords = (lessons = "") => {
 };
 const displayModal = (id) => {
   console.log(id);
-  //   const url = `https:// openapi.programming-hero.com/api/word/${id}`;
   const url = `https://openapi.programming-hero.com/api/word/${id}`;
   fetch(url)
     .then((res) => res.json())

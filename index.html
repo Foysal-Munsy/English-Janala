@@ -27,7 +27,8 @@
 <body>
     <header>
         <!-- hidden will be  added later -->
-        <nav id="nv" class="nv hidden fixed top-0 left-0 w-full bg-gray-50  text-white p-4  border-gray-200 border-b-2">
+        <nav id="nv"
+            class="z-40 nv hidden fixed top-0 left-0 w-full bg-gray-50  text-white p-4  border-gray-200 border-b-2">
             <div class="container mx-auto flex justify-between">
                 <div>
                     <p class="text-black flex items-center"><span class="font-bold">English</span><img
@@ -106,14 +107,14 @@
         </section>
 
         <!-- FAQ -->
-        <section id="faq" class="hidden">
+        <section id="faq" class="hidden scroll-mt-24">
             <div class="mb-10">
                 <h1 class="text-3xl font-bold text-center"><span class="text-[#00BCFF]">Frequently</span> Asked
                     Questions
                 </h1>
             </div>
             <!-- question and ans -->
-            <div class="grid gap-3">
+            <div class="grid gap-3 z-10">
                 <div class="collapse collapse-plus bg-base-100 border border-base-300">
                     <input type="radio" name="my-accordion-3" checked="checked" />
                     <div class="collapse-title font-semibold">How do I create an account?</div>
@@ -136,12 +137,8 @@
             </div>
         </section>
 
-        <!-- Modal Background -->
         <!-- Open the modal using ID.showModal() method -->
         <dialog id="word_details" class="modal">
-            <!-- <div id="details_container">
-
-            </div> -->
         </dialog>
 
 
