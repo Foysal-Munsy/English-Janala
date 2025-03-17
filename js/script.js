@@ -194,17 +194,28 @@ const displayWords = (lessons = null) => {
       .getElementById("lesson-container")
       .classList.add("grid", "grid-cols-3", "gap-4");
     const lessonCard = document.createElement("div");
+
     lessonCard.innerHTML = `
           <div class="bg-white rounded-lg p-10 grid gap-7">
                             <div class="grid place-items-center">
-                                <h1 class="font-bold text-xl">${lesson.word}</h1>
+                                <h1 class="font-bold text-xl">${
+                                  lesson.word
+                                }</h1>
                                 <p>Meaning /Pronunciation</p>
-                                <h1 class="font-semi-bold text-gray-700 text-xl">"${lesson.meaning} / ${lesson.pronunciation}"</h1>
+                                <h1 class="font-semi-bold text-gray-700 text-xl">"${
+                                  lesson.meaning === null
+                                    ? `<i class="fa-solid fa-xmark"></i>`
+                                    : lesson.meaning
+                                } / ${lesson.pronunciation}"</h1>
                             </div>
                             <div class="flex justify-between">
                            
-                                <button onclick="displayModal(${lesson.id})"  class="btn btn-square"><i class="fa-solid fa-circle-info"></i></button>
-                                <button onclick="pronounceWord('${lesson.word}')" class="btn btn-square"><i class="fa-solid fa-volume-high"></i></button>
+                                <button onclick="displayModal(${
+                                  lesson.id
+                                })"  class="btn btn-square"><i class="fa-solid fa-circle-info"></i></button>
+                                <button onclick="pronounceWord('${
+                                  lesson.word
+                                }')" class="btn btn-square"><i class="fa-solid fa-volume-high"></i></button>
                             </div>
                         </div>
           `;
